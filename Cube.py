@@ -32,14 +32,21 @@ edges = (
     (3, 7)
 )
 
+surfaces = (
+    (0,1,2,3),
+    (3,2,7,6),
+    (6,7,5,4),
+    (4,5,1,0),
+    (1,5,7,2),
+    (4,0,3,6)
+    )
+
 
 def Cube():
-    glBegin(GL_LINES)
-
+    glBegin(GL_QUADS)
     for edge in edges:
         for vertex in edge:
             glVertex3fv(verticies[vertex])
-
     glEnd()
 
 
@@ -56,10 +63,7 @@ def main():
 
     # Perspektive
     gluPerspective(
-        45,
-        display[0] / display[1],
-        0.1,
-        50.0
+        45, display[0] / display[1], 0.1, 50.0
     )
 
     glTranslatef(0, 0, -5)
@@ -111,6 +115,8 @@ def main():
         )
 
         Cube()
+
+        print()
 
         glPopMatrix()
 
