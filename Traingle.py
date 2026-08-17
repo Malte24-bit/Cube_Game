@@ -17,7 +17,7 @@ scaled_vertices = tuple(
 print(scaled_vertices)
 """
 
-class Traingle:
+class Triangle:
     def __init__(self, x_pos, y_pos, z_pos, color):
         self.x_pos = x_pos
         self.y_pos = y_pos
@@ -25,12 +25,20 @@ class Traingle:
         self.color = color
 
     def draw(self):
+        glPushMatrix()
+
+        glTranslatef(self.x_pos, self.y_pos, 0)
 
         glColor3f(*self.color)
+
         glBegin(GL_TRIANGLES)
+        
         for vertex_x, vertex_y in vertices:
             glVertex3f(vertex_x, vertex_y, 0)
+
         glEnd()
+
+        glPopMatrix()
 
 
 
@@ -47,7 +55,7 @@ def main():
     glTranslatef(0.0, 0.0, -5.0)
 
     #object init
-    triangle = Traingle(0, 0, 0, (0, 0, 1))
+    triangle = Triangle(0, 0, 0, (0, 0, 1))
 
     while True:
         for event in pygame.event.get():
@@ -58,13 +66,14 @@ def main():
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_RIGHT]:
-            glTranslatef(0.1, 0.0, 0.0)
+            triangle.x_pos += 0.1
         if keys[pygame.K_LEFT]:
-            glTranslatef(-0.1, 0.0, 0.0)
+            triangle.x_pos -= 0.1
         if keys[pygame.K_UP]:
-            glTranslatef(0.0, 0.1, 0.0)
+            triangle.y_pos += 0.1
         if keys[pygame.K_DOWN]:
-            glTranslatef(0.0, -0.1, 0.0)
+            triangle.y_pos -= 0.1
+
 
         # "boilerplate code"
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
