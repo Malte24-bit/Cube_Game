@@ -1,9 +1,12 @@
+import random
+
 import pygame
 from pygame.locals import *
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
+bot_movment_opt =  [(0.1, -0.1), (0.1, -0.1)]
 
 class Enemy:
     def __init__(self, x_pos, y_pos, z_pos, size, color):
@@ -40,8 +43,9 @@ class Enemy:
 
         glPopMatrix()
 
-
-
+    def move(self):
+        self.x_pos += random.choice(bot_movment_opt[0]) 
+        self.y_pos += random.choice(bot_movment_opt[1])
     
 
 

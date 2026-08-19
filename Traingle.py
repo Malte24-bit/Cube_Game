@@ -14,6 +14,7 @@ vertices = (
     (-0.5,0)
     )
 
+
 """ scale vertices
 scaled_vertices = tuple(
     (x * 0.4, y * 0.4)
@@ -53,7 +54,9 @@ def main():
     display = (2048, 1080)
     enemies = []
     spawn_timer = 0
-    SPAWN_RATE = 60
+    SPAWN_RATE = 180
+    movment_timer = 0
+    MOVMENT_RATE = 10
 
 
     triangle = Triangle(0, 0, 0, (0, 0, 1))
@@ -76,20 +79,26 @@ def main():
             random_x =  random.uniform(-3.0, 3.0)
             random_y =  random.uniform(-3.0, 3.0)
             new_enemy = Enemy.Enemy(0, 0, 0, 1, (0,0,1))
-            enemies.append(new_enemy) # Add it to our active list           
+            enemies.append(new_enemy) # Add it to our active list   
+            spawn_timer = 0        
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
+        #player movment
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT]:    triangle.x_pos += 0.05
         if keys[pygame.K_LEFT]:     triangle.x_pos -= 0.05
         if keys[pygame.K_UP]:       triangle.y_pos += 0.05
         if keys[pygame.K_DOWN]:     triangle.y_pos -= 0.05
             
-        
+        for enemy in enemies:
+            if  movment_timer >= MOVMENT_RATE:
+                enemy.move()
+                movment_timer = 0
+            movment_timer += 1
         
         # "boilerplate code"
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
