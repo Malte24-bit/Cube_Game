@@ -70,17 +70,20 @@ def main():
 
     #object init
     
-
+    random_x =  random.uniform(-3.0, 3.0)
+    random_y =  random.uniform(-3.0, 3.0)
+    new_enemy = Enemy.Enemy(0, 0, 0, 1, (0,0,1))
+    enemies.append(new_enemy)
     while True:
         spawn_timer += 1
-        if spawn_timer >= SPAWN_RATE:
-            # Create a new quad enemy from your imported Enemy module
+        #if spawn_timer >= SPAWN_RATE:
+           # Create a new quad enemy from your imported Enemy module
             # Replace 'QuadEnemyClass' with the actual class name inside Enemy.py
-            random_x =  random.uniform(-3.0, 3.0)
-            random_y =  random.uniform(-3.0, 3.0)
-            new_enemy = Enemy.Enemy(0, 0, 0, 1, (0,0,1))
-            enemies.append(new_enemy) # Add it to our active list   
-            spawn_timer = 0        
+        #    random_x =  random.uniform(-3.0, 3.0)
+         #   random_y =  random.uniform(-3.0, 3.0)
+          #  new_enemy = Enemy.Enemy(0, 0, 0, 1, (0,0,1))
+           # enemies.append(new_enemy) # Add it to our active list   
+            #spawn_timer = 0        
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -96,7 +99,7 @@ def main():
             
         for enemy in enemies:
             if  movment_timer >= MOVMENT_RATE:
-                enemy.move()
+                enemy.move((triangle.x_pos, triangle.y_pos), (enemy.x_pos, enemy.y_pos))
                 movment_timer = 0
             movment_timer += 1
         

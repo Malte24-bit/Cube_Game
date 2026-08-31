@@ -43,9 +43,17 @@ class Enemy:
 
         glPopMatrix()
 
-    def move(self):
-        self.x_pos += random.choice(bot_movment_opt[0]) 
-        self.y_pos += random.choice(bot_movment_opt[1])
+    def move(self, p_pos, b_pos):
+        if p_pos[0] - b_pos[0] > 0:
+            self.x_pos += 0.1
+        elif p_pos[0] - b_pos[0] < 0:
+            self.x_pos -= 0.1
+
+        if p_pos[1] - b_pos[1] > 0:
+            self.y_pos += 0.1
+        elif p_pos[1] - b_pos[1] < 0:
+            self.y_pos -= 0.1
+        
     
 
 
